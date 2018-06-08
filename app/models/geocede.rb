@@ -1,0 +1,3 @@
+class Geocede < ApplicationRecord
+  
+end

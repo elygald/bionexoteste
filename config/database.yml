@@ -1,37 +1,25 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
-default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+defaults: &defaults
+  adapter: postgresql
+  host: postgres
+  username: bionexo
+  password: bio12345
+  pool: false
+
 
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: myapp_development
-  pool: 5
-  username: postgres
-  password:
+  <<: *defaults
+  host: localhost
+  database: bio_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: postgresql
-  encoding: unicode
-  database: myapp_test
-  pool: 5
-  username: postgres
-  password:
+  <<: *defaults
+  host: localhost
+  database: bio_test
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: myapp_test
-  pool: 5
-  username: postgres
-  password:
+    <<: *defaults
+    host: <%=ENV['OPENSHIFT_APP_NAME']%>
+    database: <%=ENV['OPENSHIFT_APP_NAME']%>
